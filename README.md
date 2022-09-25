@@ -13,7 +13,7 @@ There are 4 data tables available to us in `balanced_tree` schema which we can u
 3. `Product Hierarcy`
 4. `Product Price`
 
-### A. High Level Sales Analysis
+### Part A. High Level Sales Analysis
 
 ## [Question #1](#case-study-questions)
 > What was the total quantity sold for all products?
@@ -50,3 +50,26 @@ FROM balanced_tree.sales S
 |total_discount |
 |---------------|
 |1106753        |
+
+### Part B. Transaction Analysis
+
+## [Question #1](#case-study-questions)
+> How many unique transactions were there?
+```SQL
+SELECT
+	COUNT(DISTINCT S.txn_id) as unique_transactions
+FROM balanced_tree.sales S
+```
+|unique_transactions |
+|--------------------|
+|2500                |
+
+
+
+
+
+
+
+
+
+
