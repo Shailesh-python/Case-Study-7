@@ -35,8 +35,6 @@ ORDER BY PD.product_name
 SELECT
 	SUM(CAST(S.qty AS INT) * CAST(S.price AS INT)) AS total_revenues
 FROM balanced_tree.sales S
-LEFT JOIN balanced_tree.product_details PD
-ON S.prod_id = PD.product_id
 ```
 |total_revenues |
 |---------------|
@@ -46,10 +44,8 @@ ON S.prod_id = PD.product_id
 > What was the total discount amount for all products?
 ```SQL
 SELECT
-	SUM(CAST(S.qty AS INT) * CAST(S.price AS INT) - CAST(S.discount AS INT)) AS total_discount
+	SUM((CAST(S.qty AS INT) * CAST(S.price AS INT)) - CAST(S.discount AS INT)) AS total_discount
 FROM balanced_tree.sales S
-LEFT JOIN balanced_tree.product_details PD
-ON S.prod_id = PD.product_id
 ```
 |total_discount |
 |---------------|
