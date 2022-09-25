@@ -88,7 +88,7 @@ FROM balanced_tree.sales S
 |--------------------|
 |     6              |
 
-### [Question #2](#case-study-questions)
+### [Question #3](#case-study-questions)
 > What are the 25th, 50th and 75th percentile values for the revenue per transaction?
 ```sql
 WITH CTE AS
