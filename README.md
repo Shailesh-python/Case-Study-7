@@ -111,9 +111,5 @@ GROUP BY S.txn_id
 	UNION
 	SELECT 'pct_75' AS percentile, CTE_RANK.revenue FROM CTE_RANK WHERE CTE_RANK.RN = (SELECT COUNT(*) FROM CTE_RANK) * .75 
 ```
-
-
-
-
-
+![image](https://user-images.githubusercontent.com/81180156/192163315-a55fb659-3de4-4a9b-b39c-4e6b517d5559.png)
 
