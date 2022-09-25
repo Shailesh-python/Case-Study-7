@@ -88,7 +88,29 @@ FROM balanced_tree.sales S
 |--------------------|
 |     6              |
 
-
+### [Question #2](#case-study-questions)
+> What are the 25th, 50th and 75th percentile values for the revenue per transaction?
+```sql
+WITH CTE AS
+(
+SELECT
+	S.txn_id,
+	SUM(CAST(S.qty AS INT) * CAST(S.price AS INT)) AS revenue	
+FROM balanced_tree.sales S
+GROUP BY S.txn_id
+),CTE_RANK AS
+(
+	SELECT
+		CTE.*,
+		ROW_NUMBER() OVER(ORDER BY CTE.revenue ASC) AS RN
+	FROM CTE
+)	
+	SELECT 'pct_25' AS percentile, CTE_RANK.revenue FROM CTE_RANK WHERE CTE_RANK.RN = (SELECT COUNT(*) FROM CTE_RANK) * .25 
+	UNION
+	SELECT 'pct_50' AS percentile, CTE_RANK.revenue FROM CTE_RANK WHERE CTE_RANK.RN = (SELECT COUNT(*) FROM CTE_RANK) * .50 
+	UNION
+	SELECT 'pct_75' AS percentile, CTE_RANK.revenue FROM CTE_RANK WHERE CTE_RANK.RN = (SELECT COUNT(*) FROM CTE_RANK) * .75 
+```
 
 
 
