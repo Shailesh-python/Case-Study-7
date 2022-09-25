@@ -41,3 +41,16 @@ ON S.prod_id = PD.product_id
 |total_revenues |
 |---------------|
 |1289453        |
+
+## [Question #3](#case-study-questions)
+> What was the total discount amount for all products?
+```SQL
+SELECT
+	SUM(CAST(S.qty AS INT) * CAST(S.price AS INT) - CAST(S.discount AS INT)) AS total_discount
+FROM balanced_tree.sales S
+LEFT JOIN balanced_tree.product_details PD
+ON S.prod_id = PD.product_id
+```
+|total_discount |
+|---------------|
+|1106753        |
