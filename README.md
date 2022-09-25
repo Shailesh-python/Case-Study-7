@@ -13,9 +13,9 @@ There are 4 data tables available to us in `balanced_tree` schema which we can u
 3. `Product Hierarcy`
 4. `Product Price`
 
-### Part A. High Level Sales Analysis
+## Part A. High Level Sales Analysis
 
-## [Question #1](#case-study-questions)
+### [Question #1](#case-study-questions)
 > What was the total quantity sold for all products?
 ```SQL
 SELECT
@@ -29,7 +29,7 @@ ORDER BY PD.product_name
 ```
 ![image](https://user-images.githubusercontent.com/81180156/192161046-1526d22d-d102-492b-972c-e1f8c984c4c2.png)
 
-## [Question #2](#case-study-questions)
+### [Question #2](#case-study-questions)
 > What is the total generated revenue for all products before discounts?
 ```SQL
 SELECT
@@ -40,7 +40,7 @@ FROM balanced_tree.sales S
 |---------------|
 |1289453        |
 
-## [Question #3](#case-study-questions)
+### [Question #3](#case-study-questions)
 > What was the total discount amount for all products?
 ```SQL
 SELECT
@@ -51,9 +51,9 @@ FROM balanced_tree.sales S
 |---------------|
 |1106753        |
 
-### Part B. Transaction Analysis
+## Part B. Transaction Analysis
 
-## [Question #1](#case-study-questions)
+### [Question #1](#case-study-questions)
 > How many unique transactions were there?
 ```SQL
 SELECT
@@ -64,7 +64,13 @@ FROM balanced_tree.sales S
 |--------------------|
 |2500                |
 
-
+### [Question #2](#case-study-questions)
+> How many unique transactions were there?
+```SQL
+SELECT
+	COUNT(DISTINCT S.txn_id) as unique_transactions
+FROM balanced_tree.sales S
+```
 
 
 
