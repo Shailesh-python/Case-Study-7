@@ -65,12 +65,28 @@ FROM balanced_tree.sales S
 |2500                |
 
 ### [Question #2](#case-study-questions)
-> How many unique transactions were there?
+> What is the average unique products purchased in each transaction?
 ```SQL
+WITH CTE AS
+(
 SELECT
-	COUNT(DISTINCT S.txn_id) as unique_transactions
+	DISTINCT
+	s.prod_id,
+	s.txn_id
 FROM balanced_tree.sales S
+),CTE_UNIQUE AS
+(	SELECT 
+		txn_id,COUNT(*) AS unique_products
+	FROM CTE
+	GROUP BY txn_id
+)	
+	SELECT 
+		AVG(unique_products) as avg_unique_products
+	FROM CTE_UNIQUE
 ```
+|avg_unique_products |
+|--------------------|
+|     6              |
 
 
 
