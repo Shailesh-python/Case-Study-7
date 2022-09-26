@@ -133,7 +133,7 @@ GROUP BY S.txn_id
 |     12.0           |
 
 ### [Question #5](#case-study-questions)
-> What is the average discount value per transaction?
+> What is the percentage split of all transactions for members vs non-members??
 ```SQL
 SELECT 
 	SUM(CASE WHEN T.member = 1 THEN 1 ELSE 0 END) AS members,
