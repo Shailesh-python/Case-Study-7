@@ -134,4 +134,19 @@ GROUP BY S.txn_id
 
 ### [Question #5](#case-study-questions)
 > What is the average discount value per transaction?
+```SQL
+SELECT 
+	SUM(CASE WHEN T.member = 1 THEN 1 ELSE 0 END) AS members,
+	SUM(CASE WHEN T.member = 1 THEN 1.0 ELSE 0 END)*100/COUNT(*) AS members_perc,
+	SUM(CASE WHEN T.member = 0 THEN 1 ELSE 0 END) AS non_members,
+	SUM(CASE WHEN T.member = 0 THEN 1.0 ELSE 0 END)*100/COUNT(*) AS nonmembers_perc
+FROM(
+SELECT
+	DISTINCT
+	S.txn_id,
+	S.member
+FROM balanced_tree.sales S
+) T
+```
+![image](https://user-images.githubusercontent.com/81180156/192248747-3d75ce86-8ebc-4f4a-97b8-132d0369b3c1.png)
 
