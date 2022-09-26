@@ -114,8 +114,8 @@ GROUP BY S.txn_id
 ![image](https://user-images.githubusercontent.com/81180156/192163315-a55fb659-3de4-4a9b-b39c-4e6b517d5559.png)
 
 
-### [Question #3](#case-study-questions)
-> What is the average discount value per transaction??
+### [Question #4](#case-study-questions)
+> What is the average discount value per transaction?
 ```SQL
 SELECT
 	AVG(T.avg_discount) * 1.0 AS avgdiscountpertrans
@@ -131,3 +131,7 @@ GROUP BY S.txn_id
 | avgdiscountpertrans |
 |--------------------|
 |     12.0           |
+
+### [Question #5](#case-study-questions)
+> What is the average discount value per transaction?
+
