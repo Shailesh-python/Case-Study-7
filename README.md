@@ -206,9 +206,20 @@ GROUP BY P.segment_name
 ```
 ![image](https://user-images.githubusercontent.com/81180156/192507545-21212227-fea1-41b0-a9c8-3ad26b60ad07.png)
 
-
-
-
+### [Question #3](#case-study-questions)
+> What is the top selling product for each segment?
+```SQL
+SELECT 
+	P.segment_name,
+	P.product_name,
+	SUM(S.qty) AS total_quantity
+FROM balanced_tree.sales S
+LEFT JOIN balanced_tree.product_details P
+	ON S.prod_id = P.product_id
+GROUP BY P.segment_name,P.product_name
+ORDER BY P.segment_name ASC, total_quantity DESC
+```
+![image](https://user-images.githubusercontent.com/81180156/192508797-1e50ecd2-6d2e-4780-9055-8e902a502ec7.png)
 
 
 
