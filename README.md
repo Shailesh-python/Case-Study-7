@@ -221,9 +221,20 @@ ORDER BY P.segment_name ASC, total_quantity DESC
 ```
 ![image](https://user-images.githubusercontent.com/81180156/192508797-1e50ecd2-6d2e-4780-9055-8e902a502ec7.png)
 
-
-
-
+### [Question #4](#case-study-questions)
+> What is the total quantity, revenue and discount for each category?
+```SQL
+SELECT 
+	P.category_name,
+	SUM(S.qty) AS total_quantity,
+	SUM(CAST(S.price AS INT) * CAST(S.qty AS INT)) AS total_revenue,
+	SUM(CAST(S.price AS INT) * CAST(S.qty AS INT) * CAST(S.discount AS INT)) AS total_discount
+FROM balanced_tree.sales S
+LEFT JOIN balanced_tree.product_details P
+	ON S.prod_id = P.product_id
+GROUP BY P.category_name
+```
+![image](https://user-images.githubusercontent.com/81180156/192510600-6250f0a8-74f1-4e96-98cd-197b02bd2d92.png)
 
 
 
