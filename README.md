@@ -185,7 +185,7 @@ ORDER BY total_revenue DESC
 ```
 
 |product_id|	product_name	         |total_revenue |
---------------------------------------------------------|
+|----------|-----------------------------|--------------|
 |2a2353	   |Blue Polo Shirt - Mens	 |217683        |
 |9ec847	   |Grey Fashion Jacket - Womens |209304        |
 |5d267b	   |White Tee Shirt - Mens	 |152000        |
