@@ -133,7 +133,7 @@ GROUP BY S.txn_id
 |     12.0           |
 
 ### [Question #5](#case-study-questions)
-> What is the percentage split of all transactions for members vs non-members??
+> What is the percentage split of all transactions for members vs non-members?
 ```SQL
 SELECT 
 	SUM(CASE WHEN T.member = 1 THEN 1 ELSE 0 END) AS members,
@@ -150,3 +150,18 @@ FROM balanced_tree.sales S
 ```
 ![image](https://user-images.githubusercontent.com/81180156/192248747-3d75ce86-8ebc-4f4a-97b8-132d0369b3c1.png)
 
+
+
+### [Question #6](#case-study-questions)
+> What is the average revenue for member transactions and non-member transactions?
+```SQL
+SELECT 
+	S.member,
+	AVG(CAST(S.price AS INT) * CAST(S.qty AS INT)) AS total_revenue
+FROM balanced_tree.sales S
+GROUP BY S.member
+```
+| member | total_revenue |
+|--------|---------------|
+|   0    |84             |
+|   1    |85             |
