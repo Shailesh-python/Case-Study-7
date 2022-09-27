@@ -165,3 +165,48 @@ GROUP BY S.member
 |--------|---------------|
 |   0    |84             |
 |   1    |85             |
+
+
+## Part C. Product Analysis
+
+### [Question #1](#case-study-questions)
+> What are the top 3 products by total revenue before discount?
+```SQL
+SELECT 
+	TOP 3
+	s.prod_id,
+	P.product_name,
+	SUM(CAST(S.price AS INT) * CAST(S.qty AS INT)) AS total_revenue
+FROM balanced_tree.sales S
+LEFT JOIN balanced_tree.product_details P
+	ON S.prod_id = P.product_id
+GROUP BY S.prod_id,P.product_name
+ORDER BY total_revenue DESC
+```
+
+|product_id|	product_name	         |total_revenue |
+--------------------------------------------------------|
+|2a2353	   |Blue Polo Shirt - Mens	 |217683        |
+|9ec847	   |Grey Fashion Jacket - Womens |209304        |
+|5d267b	   |White Tee Shirt - Mens	 |152000        |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
