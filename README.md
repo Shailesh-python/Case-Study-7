@@ -191,6 +191,20 @@ ORDER BY total_revenue DESC
 |5d267b	   |White Tee Shirt - Mens	 |152000        |
 
 
+### [Question #2](#case-study-questions)
+> What is the total quantity, revenue and discount for each segment?
+```SQL
+SELECT 
+	P.segment_name,
+	SUM(S.qty) AS total_quantity,
+	SUM(CAST(S.price AS INT) * CAST(S.qty AS INT)) AS total_revenue,
+	SUM(CAST(S.price AS INT) * CAST(S.qty AS INT) * CAST(S.discount AS INT)) AS total_discount
+FROM balanced_tree.sales S
+LEFT JOIN balanced_tree.product_details P
+	ON S.prod_id = P.product_id
+GROUP BY P.segment_name
+```
+![image](https://user-images.githubusercontent.com/81180156/192507545-21212227-fea1-41b0-a9c8-3ad26b60ad07.png)
 
 
 
