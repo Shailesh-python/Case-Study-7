@@ -291,10 +291,36 @@ GROUP BY P.segment_name,S.prod_id,P.product_name
 ![image](https://user-images.githubusercontent.com/81180156/192749680-d4d9e5e1-f5f9-403b-ab32-043a5fb7f10b.png)
 
 
+### [Question #7](#case-study-questions)
+> What is the percentage split of revenue by segment for each category?
 
-
-
-
+```sql
+;WITH CTE AS
+(
+SELECT
+	P.category_name,
+	P.segment_name,
+	SUM(CAST(S.qty AS INT) * CAST(S.price AS INT)) AS total_sales
+FROM balanced_tree.sales S
+INNER JOIN balanced_tree.product_details P
+	ON S.prod_id = P.product_id
+GROUP BY P.category_name,P.segment_name
+),SEGMENT_CTE AS
+	(
+		SELECT 
+			CTE.category_name,
+			SUM(CTE.total_sales) AS category_sales
+		FROM CTE 
+		GROUP BY CTE.category_name
+	)
+		SELECT 
+			*,sales_per = 100.0 * CTE.total_sales / SEGMENT_CTE.category_sales
+		FROM CTE
+		LEFT JOIN SEGMENT_CTE 
+			ON CTE.category_name = SEGMENT_CTE.category_name
+		ORDER BY CTE.category_name ASC
+```
+![image](https://user-images.githubusercontent.com/81180156/192751523-803a23c6-0988-4ca8-b686-aba06fd10831.png)
 
 
 
