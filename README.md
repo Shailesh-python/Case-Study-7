@@ -258,8 +258,36 @@ WHERE T.RN = 1
 ```
 ![image](https://user-images.githubusercontent.com/81180156/192736032-68f57f75-fa3b-4572-a53f-3e07edc86d24.png)
 
+### [Question #6](#case-study-questions)
+> What is the percentage split of revenue by product for each segment?
 
-
+```SQL
+;WITH CTE AS
+(
+SELECT
+	P.segment_name,
+	S.prod_id,
+	P.product_name,
+	SUM(CAST(S.qty AS INT) * CAST(S.price AS INT)) AS total_sales
+FROM balanced_tree.sales S
+INNER JOIN balanced_tree.product_details P
+	ON S.prod_id = P.product_id
+GROUP BY P.segment_name,S.prod_id,P.product_name
+),SEGMENT_CTE AS
+	(
+		SELECT 
+			CTE.segment_name,
+			SUM(CTE.total_sales) AS segment_sales
+		FROM CTE 
+		GROUP BY CTE.segment_name
+	)
+		SELECT 
+			*,sales_per = 100.0 * CTE.total_sales / SEGMENT_CTE.segment_sales
+		FROM CTE
+		LEFT JOIN SEGMENT_CTE 
+			ON CTE.segment_name = SEGMENT_CTE.segment_name
+		ORDER BY CTE.segment_name ASC
+```
 
 
 
