@@ -288,6 +288,8 @@ GROUP BY P.segment_name,S.prod_id,P.product_name
 			ON CTE.segment_name = SEGMENT_CTE.segment_name
 		ORDER BY CTE.segment_name ASC
 ```
+![image](https://user-images.githubusercontent.com/81180156/192749680-d4d9e5e1-f5f9-403b-ab32-043a5fb7f10b.png)
+
 
 
 
