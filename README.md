@@ -236,6 +236,28 @@ GROUP BY P.category_name
 ```
 ![image](https://user-images.githubusercontent.com/81180156/192510600-6250f0a8-74f1-4e96-98cd-197b02bd2d92.png)
 
+### [Question #5](#case-study-questions)
+> What is the top selling product for each category?
+```SQL
+SELECT
+	* 
+FROM
+(
+SELECT
+	P.category_name,
+	S.prod_id,
+	P.product_name,
+	SUM(S.qty) AS total_sales,
+	DENSE_RANK() OVER (PARTITION BY P.category_name ORDER BY  SUM(S.qty) DESC) AS RN
+FROM balanced_tree.sales S
+INNER JOIN balanced_tree.product_details P
+	ON S.prod_id = P.product_id
+GROUP BY P.category_name,S.prod_id,P.product_name
+) T
+WHERE T.RN = 1
+```
+![image](https://user-images.githubusercontent.com/81180156/192736032-68f57f75-fa3b-4572-a53f-3e07edc86d24.png)
+
 
 
 
