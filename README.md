@@ -362,7 +362,7 @@ GROUP BY PD.product_id,PD.product_name
 ![image](https://user-images.githubusercontent.com/81180156/193472914-ee60b16f-779f-402b-a8d9-aea46f84db58.png)
 
 ### [Question #10](#case-study-questions)
-> What is the percentage split of revenue by segment for each category?
+> What is the most common combination of at least 1 quantity of any 3 products in a 1 single transaction?
 
 ```sql
 ;WITH CTE AS
@@ -385,7 +385,8 @@ HAVING COUNT(T.prod_id) = 3
 ```
 ![image](https://user-images.githubusercontent.com/81180156/193474866-e2dde518-b67a-48c9-bb0b-d31536e229f2.png)
 
-
+### [SUPER BONUS](#case-study-questions)
+> What are the quantity, revenue, discount and net revenue from the top 3 products in the transactions where all 3 were purchased??
 
 
 
