@@ -378,7 +378,8 @@ FROM balanced_tree.sales S
 GROUP BY T.txn_id
 HAVING COUNT(T.prod_id) = 3
 )
-	SELECT * FROM balanced_tree.sales S
+	SELECT * 
+	FROM balanced_tree.sales S
 	LEFT JOIN balanced_tree.product_details PD
 	ON S.prod_id = PD.product_id
 	WHERE S.txn_id IN (SELECT txn_id FROM CTE)
@@ -386,8 +387,24 @@ HAVING COUNT(T.prod_id) = 3
 ![image](https://user-images.githubusercontent.com/81180156/193474866-e2dde518-b67a-48c9-bb0b-d31536e229f2.png)
 
 ### [SUPER BONUS](#case-study-questions)
-> What are the quantity, revenue, discount and net revenue from the top 3 products in the transactions where all 3 were purchased??
+> What are the quantity, revenue, discount and net revenue from the top 3 products in the transactions where all 3 were purchased?
+Answers may vary as per the question interpretation.
+```sql
+-- Getting top 3 product on the basis of trasactions.
+SELECT
+	TOP 3
+	S.prod_id,
+	COUNT(S.prod_id) AS total_transactions,
+	SUM(S.qty) AS total_quantity,
+	SUM(CAST(S.QTY AS INT) * CAST(S.PRICE AS INT)) AS revenue,
+	SUM(CAST(S.discount AS INT)) AS total_discounts,
+	SUM(CAST(S.QTY AS INT) * CAST(S.PRICE AS INT)) - SUM(CAST(S.discount AS INT)) AS net_revenue
+FROM balanced_tree.sales S
+GROUP BY S.prod_id
+ORDER BY total_transactions DESC
+```
 
+![image](https://user-images.githubusercontent.com/81180156/193475729-c8384e2e-3736-40e7-be19-49e63729ee48.png)
 
 
 
