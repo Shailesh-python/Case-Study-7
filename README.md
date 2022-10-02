@@ -365,7 +365,25 @@ GROUP BY PD.product_id,PD.product_name
 > What is the percentage split of revenue by segment for each category?
 
 ```sql
+;WITH CTE AS
+(
+SELECT
+	T.txn_id
+FROM
+(
+SELECT 
+	DISTINCT S.txn_id, S.prod_id 
+FROM balanced_tree.sales S
+) T
+GROUP BY T.txn_id
+HAVING COUNT(T.prod_id) = 3
+)
+	SELECT * FROM balanced_tree.sales S
+	LEFT JOIN balanced_tree.product_details PD
+	ON S.prod_id = PD.product_id
+	WHERE S.txn_id IN (SELECT txn_id FROM CTE)
 ```
+![image](https://user-images.githubusercontent.com/81180156/193474866-e2dde518-b67a-48c9-bb0b-d31536e229f2.png)
 
 
 
