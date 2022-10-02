@@ -323,4 +323,55 @@ GROUP BY P.category_name,P.segment_name
 ![image](https://user-images.githubusercontent.com/81180156/192751523-803a23c6-0988-4ca8-b686-aba06fd10831.png)
 
 
+### [Question #8](#case-study-questions)
+> What is the percentage split of revenue by segment for each category?
+
+```sql
+SELECT 
+	PD.category_id,
+	PD.category_name,
+	SUM(CAST(S.price AS INT) * CAST(S.qty AS INT)) AS total_revenue,
+	CAST(100.0 * SUM(CAST(S.price AS INT) * CAST(S.qty AS INT))/(SELECT(SUM(CAST(price AS INT) * CAST(qty AS INT))) FROM balanced_tree.sales) AS decimal(5,2))
+	 AS split_percent
+FROM balanced_tree.sales S
+LEFT JOIN balanced_tree.product_details PD
+ON S.prod_id = PD.product_id
+GROUP BY PD.category_id,PD.category_name
+```
+
+![image](https://user-images.githubusercontent.com/81180156/193471666-0f74aa14-9071-47c4-97e2-7e336b36a6a6.png)
+
+### [Question #8](#case-study-questions)
+> What is the percentage split of revenue by segment for each category?
+
+```sql
+SELECT 
+	PD.product_id,
+	PD.product_name,
+	SUM(CASE WHEN S.qty >= 1 THEN 1 ELSE NULL END) AS total_transactions,
+	SUM(CASE WHEN S.qty >= 1 THEN 1.0 ELSE NULL END)
+		/ (SELECT COUNT(DISTINCT balanced_tree.sales.txn_id)/100 FROM balanced_tree.sales) AS penetration_percentage
+FROM balanced_tree.sales S
+LEFT JOIN balanced_tree.product_details PD
+ON S.prod_id = PD.product_id
+GROUP BY PD.product_id,PD.product_name
+```
+![image](https://user-images.githubusercontent.com/81180156/193472914-ee60b16f-779f-402b-a8d9-aea46f84db58.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
