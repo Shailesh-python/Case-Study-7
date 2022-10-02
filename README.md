@@ -341,10 +341,13 @@ GROUP BY PD.category_id,PD.category_name
 
 ![image](https://user-images.githubusercontent.com/81180156/193471666-0f74aa14-9071-47c4-97e2-7e336b36a6a6.png)
 
-### [Question #8](#case-study-questions)
-> What is the percentage split of revenue by segment for each category?
+### [Question #9](#case-study-questions)
+> What is the total transaction “penetration” for each product?
 
 ```sql
+
+--Hint: penetration = number of transactions where at least 1 quantity of a product was purchased divided by total number of transactions.
+
 SELECT 
 	PD.product_id,
 	PD.product_name,
@@ -358,8 +361,11 @@ GROUP BY PD.product_id,PD.product_name
 ```
 ![image](https://user-images.githubusercontent.com/81180156/193472914-ee60b16f-779f-402b-a8d9-aea46f84db58.png)
 
+### [Question #10](#case-study-questions)
+> What is the percentage split of revenue by segment for each category?
 
-
+```sql
+```
 
 
 
