@@ -201,13 +201,13 @@ SELECT
 	P.segment_name,
 	SUM(S.qty) AS total_quantity,
 	SUM(CAST(S.price AS INT) * CAST(S.qty AS INT)) AS total_revenue,
-	SUM(CAST(S.price AS INT) * CAST(S.qty AS INT) * CAST(S.discount AS INT)) AS total_discount
+	SUM(CAST(S.discount AS INT)) AS total_discount
 FROM balanced_tree.sales S
 LEFT JOIN balanced_tree.product_details P
 	ON S.prod_id = P.product_id
 GROUP BY P.segment_name
 ```
-![image](https://user-images.githubusercontent.com/81180156/192507545-21212227-fea1-41b0-a9c8-3ad26b60ad07.png)
+![image](https://user-images.githubusercontent.com/81180156/196401791-9c2e856d-a372-47bf-9c81-6d676536982d.png)
 
 ### [Question #3](#case-study-questions)
 > What is the top selling product for each segment?
